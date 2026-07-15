@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JSantos Assessoria | Voo Atrasado ou Cancelado? Conheça Seus Direitos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:      #0A1628;
+      --ink2:     #112240;
+      --orange:   #F26419;
+      --orange-lt:#FF8C42;
+      --sky:      #1A6EBC;
+      --mist:     #F0F2F5;
+      --white:    #FFFFFF;
+      --mid:      #6B7A90;
+      --border:   #DDE3EC;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 6vw;
+      background: rgba(10,22,40,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(242,100,25,0.2);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--white); letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--orange); }
+    .nav-pill {
+      background: var(--orange); color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem; font-weight: 600;
+      padding: 9px 20px; border-radius: 100px;
+      text-decoration: none; letter-spacing: 0.04em;
+      transition: background 0.2s;
+    }
+    .nav-pill:hover { background: var(--orange-lt); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--ink);
+      display: flex; align-items: center;
+      padding: 110px 6vw 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(26,110,188,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,110,188,0.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+    .hero-glow {
+      position: absolute; top: -120px; right: -80px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(242,100,25,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 64px; max-width: 1200px; width: 100%;
+      align-items: center; position: relative; z-index: 1;
+    }
+
+    /* Badge de urgência */
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(242,100,25,0.12);
+      border: 1px solid rgba(242,100,25,0.3);
+      padding: 6px 14px; border-radius: 100px;
+      margin-bottom: 28px;
+    }
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--orange);
+      animation: blink 1.4s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero-badge span {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--orange);
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800; line-height: 1.08;
+      color: var(--white); margin-bottom: 24px;
+      letter-spacing: -0.03em;
+    }
+    .hero h1 .highlight {
+      color: var(--orange); position: relative;
+      display: inline-block;
+    }
+    .hero-sub {
+      font-size: 1.05rem; color: rgba(255,255,255,0.6);
+      max-width: 500px; margin-bottom: 40px; line-height: 1.8;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+    .btn-wa {
+      background: #25D366; color: #fff;
+      font-weight: 700; font-size: 0.92rem;
+      padding: 15px 28px; border-radius: 100px;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-wa:hover { background: #1fb858; transform: translateY(-2px); }
+    .btn-ghost {
+      border: 1px solid rgba(255,255,255,0.2); color: var(--white);
+      font-size: 0.92rem; padding: 15px 24px; border-radius: 100px;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--orange); background: rgba(242,100,25,0.08); }
+
+    /* Trust bar */
+    .hero-trust {
+      display: flex; gap: 28px; flex-wrap: wrap;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .trust-item { display: flex; align-items: center; gap: 10px; }
+    .trust-icon { font-size: 1.2rem; }
+    .trust-text { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.4; }
+    .trust-text strong { color: rgba(255,255,255,0.75); display: block; }
+
+    /* Clock SVG card */
+    .hero-visual {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 36px 32px;
+      text-align: center;
+      position: relative;
+    }
+    .hero-visual::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+    }
+    .clock-wrap {
+      width: 200px; height: 200px;
+      margin: 0 auto 24px;
+      position: relative;
+    }
+    .clock-face {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: var(--ink2);
+      border: 2px solid rgba(242,100,25,0.3);
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .clock-ring {
+      position: absolute; inset: 8px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .clock-delayed {
+      position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+      font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--orange); font-weight: 600; font-family: 'Syne', sans-serif;
+    }
+    /* Marcas de hora */
+    .tick {
+      position: absolute; width: 2px; height: 10px;
+      background: rgba(255,255,255,0.15);
+      left: 50%; top: 6px;
+      transform-origin: 50% 94px;
+    }
+    .tick.major { height: 14px; background: rgba(255,255,255,0.3); width: 2px; }
+    /* Ponteiros */
+    .hand {
+      position: absolute; bottom: 50%; left: 50%;
+      transform-origin: 50% 100%;
+      border-radius: 4px 4px 0 0;
+    }
+    .hand-hour {
+      width: 4px; height: 54px;
+      background: rgba(255,255,255,0.6);
+      margin-left: -2px;
+      transform: rotate(120deg);
+    }
+    .hand-min {
+      width: 3px; height: 72px;
+      background: rgba(255,255,255,0.8);
+      margin-left: -1.5px;
+      transform: rotate(240deg);
+    }
+    /* Avião como ponteiro de segundos */
+    .hand-plane {
+      width: 3px; height: 80px;
+      margin-left: -1.5px;
+      transform: rotate(30deg);
+      display: flex; align-items: flex-start; justify-content: center;
+    }
+    .plane-needle {
+      font-size: 18px;
+      transform: rotate(0deg);
+      line-height: 1;
+      filter: drop-shadow(0 0 6px rgba(242,100,25,0.8));
+    }
+    .center-dot {
+      position: absolute; width: 10px; height: 10px; border-radius: 50%;
+      background: var(--orange); z-index: 10;
+    }
+    /* Tag ATRASADO no relógio */
+    .clock-status {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      background: rgba(242,100,25,0.15);
+      border: 1px solid rgba(242,100,25,0.4);
+      padding: 3px 10px; border-radius: 4px;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em;
+      color: var(--orange); white-space: nowrap;
+      font-family: 'Syne', sans-serif;
+    }
+
+    .visual-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--white); margin-bottom: 8px;
+    }
+    .visual-sub {
+      font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.6;
+    }
+    .rights-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; margin-top: 24px;
+    }
+    .right-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 12px; border-radius: 8px; text-align: left;
+    }
+    .right-item .value {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 800;
+      color: var(--orange); line-height: 1;
+    }
+    .right-item .desc {
+      font-size: 0.72rem; color: rgba(255,255,255,0.4);
+      margin-top: 4px; line-height: 1.4;
+    }
+
+    /* ── SEÇÃO: QUANDO VOCÊ TEM DIREITO ── */
+    .when {
+      background: var(--mist); padding: 88px 6vw;
+    }
+    .section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::before {
+      content: ''; display: block;
+      width: 24px; height: 2px; background: var(--orange);
+    }
+    .when h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      font-weight: 800; color: var(--ink);
+      max-width: 600px; line-height: 1.15;
+      margin-bottom: 16px; letter-spacing: -0.03em;
+    }
+    .when-sub {
+      color: var(--mid); font-size: 1rem;
+      max-width: 560px; margin-bottom: 52px; line-height: 1.8;
+    }
+    .when-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px; max-width: 1100px;
+    }
+    .when-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 28px 24px;
+      position: relative; overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .when-card:hover {
+      box-shadow: 0 12px 40px rgba(10,22,40,0.1);
+      transform: translateY(-3px);
+    }
+    .when-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--orange);
+    }
+    .when-icon {
+      font-size: 2rem; margin-bottom: 16px;
+    }
+    .when-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--ink); margin-bottom: 8px; letter-spacing: -0.02em;
+    }
+    .when-card p {
+      font-size: 0.87rem; color: var(--mid); line-height: 1.7;
+    }
+    .when-threshold {
+      display: inline-block; margin-top: 12px;
+      background: rgba(242,100,25,0.08);
+      border: 1px solid rgba(242,100,25,0.2);
+      padding: 4px 10px; border-radius: 4px;
+      font-size: 0.72rem; font-weight: 600;
+      color: var(--orange); letter-spacing: 0.04em;
+    }
+
+    /* ── SEÇÃO: O QUE VOCÊ PODE REQUERER ── */
+    .rights {
+      background: var(--ink); padding: 88px 6vw;
+    }
+    .rights h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      font-weight: 800; color: var(--white);
+      margin-bottom: 12px; letter-spacing: -0.03em;
+    }
+    .rights-sub {
+      color: rgba(255,255,255,0.5); font-size: 1rem;
+      max-width: 520px; margin-bottom: 52px; line-height: 1.8;
+    }
+    .rights-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2px; max-width: 1100px;
+    }
+    .right-row {
+      display: flex; align-items: flex-start; gap: 20px;
+      padding: 24px 20px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .right-row:hover { background: rgba(255,255,255,0.03); }
+    .right-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem; font-weight: 800;
+      color: rgba(242,100,25,0.25); line-height: 1;
+      flex-shrink: 0; width: 36px;
+    }
+    .right-body h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      color: var(--white); margin-bottom: 6px;
+    }
+    .right-body p {
+      font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.7;
+    }
+
+    /* ── SEÇÃO: SOBRE O ESCRITÓRIO ── */
+    .about {
+      background: var(--mist); padding: 88px 6vw;
+      display: flex; justify-content: center;
+    }
+    .about-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; max-width: 1100px; width: 100%; align-items: center;
+    }
+    .about-visual {
+      background: var(--ink); border-radius: 16px;
+      padding: 48px 36px; position: relative; overflow: hidden;
+    }
+    .about-visual::before {
+      content: '';
+      position: absolute; top: -40px; right: -40px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(242,100,25,0.15), transparent 70%);
+    }
+    .about-stat {
+      margin-bottom: 28px; position: relative; z-index: 1;
+    }
+    .about-stat .num {
+      font-family: 'Syne', sans-serif;
+      font-size: 3rem; font-weight: 800;
+      color: var(--white); line-height: 1;
+    }
+    .about-stat .num span { color: var(--orange); }
+    .about-stat .lbl {
+      font-size: 0.82rem; color: rgba(255,255,255,0.45);
+      margin-top: 4px; letter-spacing: 0.04em;
+    }
+    .about-divider {
+      height: 1px; background: rgba(255,255,255,0.07);
+      margin: 20px 0;
+    }
+    .about-oab {
+      font-size: 0.75rem; color: rgba(255,255,255,0.25);
+      letter-spacing: 0.06em;
+    }
+    .about-content .section-label { justify-content: flex-start; }
+    .about-content h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 800; color: var(--ink);
+      margin-bottom: 20px; letter-spacing: -0.03em; line-height: 1.15;
+    }
+    .about-content p {
+      color: var(--mid); font-size: 0.95rem;
+      line-height: 1.85; margin-bottom: 18px;
+    }
+    .about-features { list-style: none; margin: 24px 0 0; }
+    .about-features li {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem; color: var(--ink);
+    }
+    .about-features li::before {
+      content: '→'; color: var(--orange); font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    /* ── SEÇÃO: COMO FUNCIONA ── */
+    .process {
+      background: var(--white); padding: 88px 6vw; text-align: center;
+    }
+    .process h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      font-weight: 800; color: var(--ink);
+      margin-bottom: 12px; letter-spacing: -0.03em;
+    }
+    .process-sub {
+      color: var(--mid); max-width: 480px;
+      margin: 0 auto 60px; line-height: 1.8; font-size: 1rem;
+    }
+    .process-track {
+      display: flex; align-items: flex-start;
+      gap: 0; max-width: 900px; margin: 0 auto;
+      position: relative;
+    }
+    .process-track::before {
+      content: '';
+      position: absolute; top: 28px; left: 15%; right: 15%;
+      height: 1px; background: linear-gradient(90deg, var(--border), var(--orange), var(--border));
+    }
+    .process-step {
+      flex: 1; padding: 0 12px; position: relative; z-index: 1;
+    }
+    .step-bubble {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--ink); border: 2px solid var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem; font-weight: 800; color: var(--orange);
+    }
+    .step-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      color: var(--ink); margin-bottom: 8px;
+    }
+    .step-desc {
+      font-size: 0.83rem; color: var(--mid); line-height: 1.7;
+    }
+
+    /* ── AVISO LEGAL OAB ── */
+    .legal {
+      background: var(--mist);
+      padding: 24px 6vw; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .legal p {
+      font-size: 0.76rem; color: #9AA3B0;
+      max-width: 800px; margin: 0 auto; line-height: 1.8;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: var(--ink); padding: 100px 6vw; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '✈';
+      position: absolute; font-size: 20rem;
+      color: rgba(255,255,255,0.02);
+      right: -40px; bottom: -60px;
+      line-height: 1; user-select: none;
+    }
+    .cta-inner { max-width: 640px; margin: 0 auto; position: relative; z-index: 1; }
+    .cta-section .section-label { justify-content: center; }
+    .cta-section h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800; color: var(--white);
+      margin-bottom: 16px; letter-spacing: -0.03em; line-height: 1.15;
+    }
+    .cta-section h2 span { color: var(--orange); }
+    .cta-section p {
+      color: rgba(255,255,255,0.5); font-size: 0.98rem;
+      margin-bottom: 40px; line-height: 1.8; max-width: 500px; margin-left: auto; margin-right: auto;
+    }
+    .cta-buttons {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 14px;
+    }
+    .btn-wa-lg {
+      background: #25D366; color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1.05rem;
+      padding: 18px 40px; border-radius: 100px;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 12px;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: -0.01em;
+    }
+    .btn-wa-lg:hover { background: #1fb858; transform: translateY(-2px); }
+    .cta-email {
+      font-size: 0.85rem; color: rgba(255,255,255,0.3);
+    }
+    .cta-email a { color: var(--orange); text-decoration: none; }
+    .cta-note {
+      margin-top: 32px; font-size: 0.74rem;
+      color: rgba(255,255,255,0.2); line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #050d1a;
+      padding: 40px 6vw;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-logo span { color: var(--orange); }
+    .footer-meta {
+      font-size: 0.75rem; color: rgba(255,255,255,0.2);
+      line-height: 1.8; text-align: right;
+    }
+
+    /* ── FLOATING WA ── */
+    .float-wa {
+      position: fixed; bottom: 26px; right: 26px; z-index: 200;
+    }
+    .float-wa a {
+      width: 58px; height: 58px; border-radius: 50%;
+      background: #25D366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      text-decoration: none;
+      animation: wpulse 2.4s ease-in-out infinite;
+      transition: transform 0.15s;
+    }
+    .float-wa a:hover { transform: scale(1.1); }
+    @keyframes wpulse {
+      0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.45); }
+      50%      { box-shadow: 0 4px 32px rgba(37,211,102,0.7); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .about-inner { grid-template-columns: 1fr; gap: 36px; }
+      .process-track { flex-direction: column; gap: 32px; align-items: center; }
+      .process-track::before { display: none; }
+      .process-step { max-width: 300px; }
+    }
+    @media (max-width: 600px) {
+      nav .nav-pill { display: none; }
+      .hero h1 { font-size: 2.2rem; }
+      .rights-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .badge-dot, .float-wa a { animation: none; }
+      .btn-wa:hover, .btn-wa-lg:hover, .when-card:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">JS<span>antos</span> Assessoria</div>
+    <a class="nav-pill" href="#contato">Falar pelo WhatsApp</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">
+          <div class="badge-dot"></div>
+          <span>Direito do Consumidor · Transporte Aéreo</span>
+        </div>
+        <h1>Seu voo atrasou ou foi <span class="highlight">cancelado?</span><br>Você tem direitos.</h1>
+        <p class="hero-sub">Companhias aéreas descumprem obrigações com frequência. A JSantos Assessoria orienta passageiros a entender e buscar o que a lei assegura — sem complicação.</p>
+        <div class="hero-actions">
+          <a class="btn-wa" href="https://wa.me/5521983583519?text=Olá,%20tive%20problemas%20com%20um%20voo%20e%20gostaria%20de%20orientação%20jurídica" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Quero entender meus direitos
+          </a>
+          <a class="btn-ghost" href="#quando">Saiba mais</a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item">
+            <span class="trust-icon">⚖️</span>
+            <div class="trust-text"><strong>Assessoria especializada</strong>Direito do Consumidor</div>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">🔒</span>
+            <div class="trust-text"><strong>Sigilo garantido</strong>Estatuto da OAB</div>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">📍</span>
+            <div class="trust-text"><strong>Rio de Janeiro</strong>Atendimento online em todo o Brasil</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Relógio decorativo -->
+      <div class="hero-visual">
+        <div class="clock-wrap">
+          <div class="clock-face">
+            <div class="clock-ring"></div>
+            <span class="clock-delayed">DELAYED</span>
+            <!-- ticks -->
+            <div class="tick major" style="transform:rotate(0deg) translateX(-50%)"></div>
+            <div class="tick" style="transform:rotate(30deg) translateX(-50%)"></div>
+            <div class="tick" style="transform:rotate(60deg) translateX(-50%)"></div>
+            <div class="tick major" style="transform:rotate(90deg) translateX(-50%)"></div>
+            <div class="tick" style="transform:rotate(120deg) translateX(-50%)"></div>
+            <div class="tick" style="transform:rotate(150deg) translateX(-50%)"></div>
+            <div class="tick major" style="transform:rotate(180deg) translateX(-50%)"></div>
+            <div class="tick" style="transform:rotate(210deg) translateX(-50%)"></div>
+            <div class="tick" style="transform:rotate(240deg) translateX(-50%)"></div>
+            <div class="tick major" style="transform:rotate(270deg) translateX(-50%)"></div>
+            <div class="tick" style="transform:rotate(300deg) translateX(-50%)"></div>
+            <div class="tick" style="transform:rotate(330deg) translateX(-50%)"></div>
+            <!-- ponteiros -->
+            <div class="hand hand-hour"></div>
+            <div class="hand hand-min"></div>
+            <div class="hand hand-plane">
+              <span class="plane-needle">✈</span>
+            </div>
+            <div class="center-dot"></div>
+            <div class="clock-status">⚠ VOO ATRASADO</div>
+          </div>
+        </div>
+        <div class="visual-label">Cada minuto de espera tem um valor legal</div>
+        <div class="visual-sub">A lei brasileira estabelece obrigações claras para as companhias aéreas em casos de atraso e cancelamento.</div>
+        <div class="rights-grid">
+          <div class="right-item">
+            <div class="value">1h+</div>
+            <div class="desc">Comunicação e voucher de alimentação</div>
+          </div>
+          <div class="right-item">
+            <div class="value">2h+</div>
+            <div class="desc">Acomodação ou reembolso imediato</div>
+          </div>
+          <div class="right-item">
+            <div class="value">4h+</div>
+            <div class="desc">Reacomodação ou reembolso integral</div>
+          </div>
+          <div class="right-item">
+            <div class="value">ANAC</div>
+            <div class="desc">Resolução 400 — norma em vigor</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUANDO TEM DIREITO -->
+  <section class="when" id="quando">
+    <div class="section-label">Situações cobertas</div>
+    <h2>Quando a companhia aérea deve responder</h2>
+    <p class="when-sub">O Código de Defesa do Consumidor e a Resolução ANAC nº 400 estabelecem obrigações claras. Veja as situações mais comuns em que o passageiro pode buscar seus direitos.</p>
+    <div class="when-grid">
+      <div class="when-card">
+        <div class="when-icon">🕐</div>
+        <h3>Atraso de voo</h3>
+        <p>A partir de 1 hora de espera, surgem obrigações progressivas para a companhia, como assistência material (comunicação, alimentação) e, nos atrasos mais longos, reacomodação ou reembolso.</p>
+        <span class="when-threshold">A partir de 1h de atraso</span>
+      </div>
+      <div class="when-card">
+        <div class="when-icon">❌</div>
+        <h3>Cancelamento de voo</h3>
+        <p>O cancelamento impõe à companhia aérea o dever de oferecer ao passageiro opções de reacomodação em outro voo ou reembolso integral do valor pago, incluindo taxas.</p>
+        <span class="when-threshold">Qualquer cancelamento</span>
+      </div>
+      <div class="when-card">
+        <div class="when-icon">🚪</div>
+        <h3>Overbooking (preterição)</h3>
+        <p>Quando a empresa vende mais assentos do que disponíveis e impede o embarque — prática conhecida como preterição —, o passageiro tem direitos específicos, incluindo indenização.</p>
+        <span class="when-threshold">Embarque negado</span>
+      </div>
+      <div class="when-card">
+        <div class="when-icon">🧳</div>
+        <h3>Extravio ou dano de bagagem</h3>
+        <p>Malas extraviadas, danificadas ou entregues com atraso geram responsabilidade objetiva da companhia aérea, independentemente de culpa, conforme o Código Civil e normas da ANAC.</p>
+        <span class="when-threshold">Bagagem extraviada ou avariada</span>
+      </div>
+      <div class="when-card">
+        <div class="when-icon">🔄</div>
+        <h3>Conexão perdida por culpa da empresa</h3>
+        <p>Quando um atraso causado pela companhia leva à perda de voo de conexão, as responsabilidades se estendem ao trecho perdido, incluindo reacomodação e assistência material.</p>
+        <span class="when-threshold">Conexão no mesmo bilhete</span>
+      </div>
+      <div class="when-card">
+        <div class="when-icon">📋</div>
+        <h3>Informação inadequada ou recusa indevida</h3>
+        <p>A recusa em prestar informações claras sobre o motivo do atraso, alternativas disponíveis ou os direitos do passageiro pode também fundamentar a busca por reparação.</p>
+        <span class="when-threshold">Omissão de informações</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- O QUE VOCÊ PODE REQUERER -->
+  <section class="rights">
+    <div class="section-label" style="color:rgba(242,100,25,0.9);">O que a lei prevê</div>
+    <h2>Direitos que podem ser buscados</h2>
+    <p class="rights-sub">A legislação brasileira assegura ao passageiro diferentes formas de reparação. A aplicação depende das circunstâncias específicas de cada caso.</p>
+    <div class="rights-list">
+      <div class="right-row">
+        <div class="right-num">01</div>
+        <div class="right-body">
+          <h4>Reembolso integral</h4>
+          <p>Devolução do valor total da passagem, incluindo taxas, nos casos em que o passageiro optar por não aceitar a reacomodação oferecida.</p>
+        </div>
+      </div>
+      <div class="right-row">
+        <div class="right-num">02</div>
+        <div class="right-body">
+          <h4>Assistência material</h4>
+          <p>Alimentação, comunicação e acomodação são obrigações da empresa conforme o tempo de espera, previstas na Resolução ANAC nº 400.</p>
+        </div>
+      </div>
+      <div class="right-row">
+        <div class="right-num">03</div>
+        <div class="right-body">
+          <h4>Reacomodação em outro voo</h4>
+          <p>Colocação do passageiro no próximo voo disponível para o mesmo destino, sem custo adicional, inclusive em outras companhias.</p>
+        </div>
+      </div>
+      <div class="right-row">
+        <div class="right-num">04</div>
+        <div class="right-body">
+          <h4>Indenização por danos morais</h4>
+          <p>Em situações em que o descumprimento gerar sofrimento, constrangimento ou prejuízo relevante, pode ser cabível pleito de indenização via ação judicial.</p>
+        </div>
+      </div>
+      <div class="right-row">
+        <div class="right-num">05</div>
+        <div class="right-body">
+          <h4>Reparação por danos materiais</h4>
+          <p>Gastos comprovados decorrentes do problema — como hospedagem extra, alimentação e transporte — podem ser objeto de ressarcimento.</p>
+        </div>
+      </div>
+      <div class="right-row">
+        <div class="right-num">06</div>
+        <div class="right-body">
+          <h4>Indenização por bagagem</h4>
+          <p>Extravio, avaria ou atraso na entrega de bagagem geram direito à indenização, com limites estabelecidos pela legislação vigente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE O ESCRITÓRIO -->
+  <section class="about" id="sobre">
+    <div class="about-inner">
+      <div class="about-visual">
+        <div class="about-stat">
+          <div class="num">6<span>+</span></div>
+          <div class="lbl">anos de atuação em Direito do Consumidor</div>
+        </div>
+        <div class="about-divider"></div>
+        <div class="about-stat">
+          <div class="num" style="font-size:2rem;">RJ</div>
+          <div class="lbl">Atendimento em todo o Brasil, inclusive de forma remota</div>
+        </div>
+        <div class="about-divider"></div>
+        <div class="about-stat">
+          <div class="num" style="font-size:1.4rem;">✈ 🧳 ⚖️</div>
+          <div class="lbl">Voos · Bagagem · Consumidor</div>
+        </div>
+        <div class="about-oab">JSantos Assessoria Jurídica · Rio de Janeiro, RJ</div>
+      </div>
+      <div class="about-content">
+        <div class="section-label">Quem somos</div>
+        <h2>Assessoria jurídica focada em você, passageiro</h2>
+        <p>A JSantos Assessoria atua na orientação e representação de consumidores que tiveram seus direitos desrespeitados por companhias aéreas — seja em atrasos, cancelamentos, overbooking ou problemas com bagagem.</p>
+        <p>Nosso trabalho começa pela análise do seu caso: entendemos o que aconteceu, identificamos a fundamentação legal aplicável e apresentamos as opções disponíveis de forma clara e direta.</p>
+        <ul class="about-features">
+          <li>Análise individualizada de cada caso</li>
+          <li>Atuação em processos administrativos e judiciais</li>
+          <li>Atendimento online em todo o território nacional</li>
+          <li>Comunicação clara durante todo o processo</li>
+          <li>Sigilo profissional assegurado pelo Estatuto da OAB</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="process" id="como-funciona">
+    <div class="section-label" style="justify-content:center;">Etapas do atendimento</div>
+    <h2>Como funciona a orientação jurídica</h2>
+    <p class="process-sub">Processo simples, transparente e conduzido com atenção ao seu caso específico.</p>
+    <div class="process-track">
+      <div class="process-step">
+        <div class="step-bubble">1</div>
+        <div class="step-title">Relato do caso</div>
+        <p class="step-desc">Você descreve o que aconteceu — atraso, cancelamento, bagagem ou overbooking — e compartilha os documentos que tiver.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-bubble">2</div>
+        <div class="step-title">Análise jurídica</div>
+        <p class="step-desc">Avaliamos os fatos, verificamos a legislação aplicável (CDC, Resolução ANAC nº 400) e identificamos os fundamentos do seu caso.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-bubble">3</div>
+        <div class="step-title">Orientação clara</div>
+        <p class="step-desc">Apresentamos as opções disponíveis — negociação extrajudicial ou ação judicial — e você decide como quer prosseguir.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-bubble">4</div>
+        <div class="step-title">Acompanhamento</div>
+        <p class="step-desc">Conduzimos o processo escolhido com atualizações regulares, do início à conclusão do seu caso.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVISO LEGAL OAB -->
+  <section class="legal">
+    <p><strong>Aviso legal:</strong> Este site tem caráter exclusivamente informativo, nos termos do art. 39 do Código de Ética e Disciplina da OAB e do Provimento nº 205/2021 do Conselho Federal da OAB. As informações aqui contidas não constituem aconselhamento jurídico individualizado nem promessa de resultado. Cada caso possui circunstâncias próprias que devem ser analisadas por profissional habilitado.</p>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contato">
+    <div class="cta-inner">
+      <div class="section-label" style="justify-content:center;">Entre em contato</div>
+      <h2>Teve problema com um voo?<br><span>Entenda seus direitos.</span></h2>
+      <p>Descreva sua situação para a equipe da JSantos Assessoria. O atendimento é sigiloso, personalizado e comprometido com a clareza jurídica que você merece.</p>
+      <div class="cta-buttons">
+        <a class="btn-wa-lg" href="https://wa.me/5521983583519?text=Olá,%20tive%20um%20problema%20com%20meu%20voo%20e%20gostaria%20de%20orientação%20jurídica" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Falar pelo WhatsApp
+        </a>
+        <div class="cta-email">ou envie um e-mail para <a href="mailto:juridico.jsantosadvocacia@gmail.com.br">juridico.jsantosadvocacia@gmail.com.br</a></div>
+      </div>
+      <p class="cta-note">As informações compartilhadas nesta consulta são protegidas pelo sigilo profissional, nos termos do Estatuto da OAB.<br>JSantos Assessoria Jurídica · Rio de Janeiro, RJ · Atendimento remoto em todo o Brasil.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">JS<span>antos</span> Assessoria Jurídica</div>
+    <div class="footer-meta">
+      © 2025 JSantos Assessoria Jurídica · Rio de Janeiro, RJ<br>
+      <a href="#" style="color:rgba(255,255,255,0.2);text-decoration:none;">Política de Privacidade</a>
+    </div>
+  </footer>
+
+  <!-- FLOATING WA -->
+  <div class="float-wa">
+    <a href="https://wa.me/5521983583519?text=Olá,%20tive%20um%20problema%20com%20meu%20voo" target="_blank" rel="noopener" title="Falar pelo WhatsApp">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+  </div>
+
+</body>
+</html>
